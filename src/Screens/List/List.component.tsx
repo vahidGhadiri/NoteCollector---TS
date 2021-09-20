@@ -20,7 +20,7 @@ const List: React.FC = () => {
         }
     }
 
-    const handleCompleteChange = (handleTask: ITask): ChangeEventHandler<HTMLInputElement> => (e) => {
+    const handleTaskCompleteChange = (handleTask: ITask): ChangeEventHandler<HTMLInputElement> => (e) => {
         setTasks((tasks) =>
             tasks.map((task => {
                 if (task.id === handleTask.id) return {...task, isComplete: e.target.checked}
@@ -34,6 +34,11 @@ const List: React.FC = () => {
         setTasks(completedTasks)
     }
 
+    const handleTaskDelete = (handleTask: ITask) => {
+        const deletedTask = tasks.filter(task => task.id !== handleTask.id)
+        setTasks(deletedTask)
+    }
+
 
     return (
         <>
@@ -42,8 +47,9 @@ const List: React.FC = () => {
                     <div key={task.id}>
                         <input type="checkbox"
                                checked={task.isComplete}
-                               onChange={handleCompleteChange(task)}/>
+                               onChange={handleTaskCompleteChange(task)}/>
                         <span>{task.label}</span>
+                        <button onClick={() => handleTaskDelete(task)}>Delete</button>
                     </div>
                 ))}
             </div>
