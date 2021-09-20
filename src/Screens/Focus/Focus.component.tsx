@@ -1,13 +1,13 @@
 import React from "react"
+import {ITaskProps} from "../../Types/index.interface";
 
 
-interface Props {
-}
+const Focus: React.FC<ITaskProps> = ({tasks}) => {
+    const task = tasks[0]
 
-const Focus: React.FC<Props> = () => {
     return (
         <div>
-            Focus
+            {task ? <div>{task.label}</div> : <div>There is no task!</div>}
         </div>
     )
 }

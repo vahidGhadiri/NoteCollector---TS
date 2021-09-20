@@ -1,11 +1,10 @@
 import React, {ChangeEventHandler, KeyboardEventHandler, MouseEventHandler, useState} from "react"
 import {nanoid} from "nanoid";
 
-import {ITask} from "../../Types/index.interface";
+import {ITask, ITaskProps} from "../../Types/index.interface";
 
 
-const List: React.FC = () => {
-    const [tasks, setTasks] = useState<ITask[]>([])
+const List: React.FC<ITaskProps> = ({tasks, setTasks}) => {
     const [newTaskLabel, setNewTaskLabel] = useState('')
 
 

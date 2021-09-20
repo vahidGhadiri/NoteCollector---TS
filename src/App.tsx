@@ -1,9 +1,13 @@
-import React from "react"
+import React, {useState} from "react"
 import {BrowserRouter as Router, Switch, Route, NavLink} from "react-router-dom";
 
 import {List, Focus} from "./Screens/index";
+import {ITask} from "./Types/index.interface";
 
 const App: React.FC = () => {
+    const [tasks, setTasks] = useState<ITask[]>([])
+    const tasksProps = {tasks, setTasks}
+
     return (
         <Router>
 
@@ -13,8 +17,8 @@ const App: React.FC = () => {
             </nav>
 
             <Switch>
-                <Route path="/" component={List} exact/>
-                <Route path="/focus" component={Focus} exact/>
+                <Route path="/" exact><List {...tasksProps}/></Route>
+                <Route path="/focus" exact><Focus {...tasksProps}/></Route>
             </Switch>
         </Router>
     )
