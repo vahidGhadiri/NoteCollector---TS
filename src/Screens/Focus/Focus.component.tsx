@@ -1,12 +1,13 @@
 import React from "react"
-import {Link} from "react-router-dom";
 
-const Focus: React.FC = () => {
+
+interface Props {
+}
+
+const Focus: React.FC<Props> = () => {
     return (
         <div>
-            <Link to="/">
-                <button>GO TO VIEW MODE</button>
-            </Link>
+            Focus
         </div>
     )
 }
