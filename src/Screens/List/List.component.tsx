@@ -4,7 +4,7 @@ import {nanoid} from "nanoid";
 import {ITask, ITaskProps} from "../../Types/index.interface";
 
 
-const List: React.FC<ITaskProps> = ({tasks, setTasks}) => {
+const List: React.FC<ITaskProps> = ({tasks, setTasks, updateCompletion}) => {
     const [newTaskLabel, setNewTaskLabel] = useState('')
 
 
@@ -19,13 +19,8 @@ const List: React.FC<ITaskProps> = ({tasks, setTasks}) => {
         }
     }
 
-    const handleTaskCompleteChange = (handleTask: ITask): ChangeEventHandler<HTMLInputElement> => (e) => {
-        setTasks((tasks) =>
-            tasks.map((task => {
-                if (task.id === handleTask.id) return {...task, isComplete: e.target.checked}
-                return task
-            }))
-        )
+    const handleTaskCompleteChange = (task: ITask): ChangeEventHandler<HTMLInputElement> => (e) => {
+        updateCompletion(task.id, e.target.checked)
     }
 
     const handleClearClicked: MouseEventHandler<HTMLButtonElement> = (): void => {

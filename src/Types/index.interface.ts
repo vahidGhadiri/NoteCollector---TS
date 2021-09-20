@@ -9,5 +9,5 @@ export interface ITask {
 export interface ITaskProps {
     tasks: ITask[]
     setTasks: React.Dispatch<React.SetStateAction<ITask[]>>
-
+    updateCompletion: (taskId: string, isComplete: boolean) => void
 }
