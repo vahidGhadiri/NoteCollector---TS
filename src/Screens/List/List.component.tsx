@@ -1,10 +1,8 @@
 import React, {ChangeEventHandler, KeyboardEventHandler, MouseEventHandler, useState} from "react"
-import {nanoid} from "nanoid";
-
 import {ITask, ITaskProps} from "../../Types/index.interface";
 
 
-const List: React.FC<ITaskProps> = ({tasks, setTasks, updateCompletion}) => {
+const List: React.FC<ITaskProps> = ({tasks, setTasks, updateCompletion, addTask}) => {
     const [newTaskLabel, setNewTaskLabel] = useState('')
 
 
@@ -14,7 +12,7 @@ const List: React.FC<ITaskProps> = ({tasks, setTasks, updateCompletion}) => {
 
     const handleNewTaskKeyPress: KeyboardEventHandler<HTMLInputElement> = (e) => {
         if (e.key === "Enter" && newTaskLabel !== '') {
-            setTasks([...tasks, {id: nanoid(), label: newTaskLabel, isComplete: false}])
+            addTask({label: newTaskLabel})
             setNewTaskLabel('')
         }
     }
