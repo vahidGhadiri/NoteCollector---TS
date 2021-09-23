@@ -1,5 +1,9 @@
 import React, {ChangeEventHandler, KeyboardEventHandler, MouseEventHandler, useState} from "react"
+
 import {ITask, ITaskProps} from "../../Types/index.interface";
+import {TextButton, Input} from "../../Components/index"
+
+import {StyledList, Container} from "../../Styles/Styles";
 
 
 const List: React.FC<ITaskProps> = ({tasks, setTasks, updateCompletion, addTask}) => {
@@ -33,8 +37,8 @@ const List: React.FC<ITaskProps> = ({tasks, setTasks, updateCompletion, addTask}
 
 
     return (
-        <>
-            <div>
+        <Container>
+            <StyledList>
                 {tasks.map((task) => (
                     <div key={task.id}>
                         <input type="checkbox"
@@ -44,15 +48,13 @@ const List: React.FC<ITaskProps> = ({tasks, setTasks, updateCompletion, addTask}
                         <button onClick={() => handleTaskDelete(task)}>Delete</button>
                     </div>
                 ))}
-            </div>
-            <input value={newTaskLabel}
+            </StyledList>
+            <Input value={newTaskLabel}
                    onChange={(e) => handleNewTaskLabelChange(e)}
                    onKeyPress={(e) => handleNewTaskKeyPress(e)}
             />
-            <div>
-                <button onClick={handleClearClicked}>Clear Completed</button>
-            </div>
-        </>
+            <TextButton onClick={handleClearClicked}>Clear Completed</TextButton>
+        </Container>
     )
 }
 

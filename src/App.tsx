@@ -1,11 +1,13 @@
-import React, {ChangeEventHandler, KeyboardEventHandler, useState} from "react"
-import {BrowserRouter as Router, Switch, Route, NavLink} from "react-router-dom";
+import React, {useState} from "react"
+import {BrowserRouter as Router, Switch, Route} from "react-router-dom";
 import {shuffle} from "lodash";
 
 import {List, Focus} from "./Screens/index";
 import {ITask} from "./Types/index.interface";
 import {nanoid} from "nanoid";
 
+import {TabButton, Nav, Layout} from "./Styles/Styles";
+import {GlobalStyle} from "./Styles/GlobalStyles";
 
 const App: React.FC = () => {
     const [tasks, setTasks] = useState<ITask[]>([])
@@ -35,32 +37,36 @@ const App: React.FC = () => {
     }
 
     return (
-        <Router>
-            <nav>
-                <NavLink to="/" activeStyle={{fontWeight: "bold"}} exact>List</NavLink>
-                <NavLink to="/focus" activeStyle={{fontWeight: "bold"}} exact>Focus</NavLink>
-            </nav>
-
-            <Switch>
-                <Route path="/" exact component={List}>
-                    <List updateCompletion={updateTaskCompletion}
-                          addTask={addTask}
-                          focusedTask={focusedTask}
-                          tasks={tasks}
-                          setTasks={setTasks}
-                          shuffleFocusedTask={shuffleFocusedTask}/>
-                </Route>
-                <Route path="/focus" exact>
-                    <Focus updateCompletion={updateTaskCompletion}
-                           addTask={addTask}
-                           focusedTask={focusedTask}
-                           shuffleFocusedTask={shuffleFocusedTask}
-                           tasks={tasks}
-                           setTasks={setTasks}
-                    />
-                </Route>
-            </Switch>
-        </Router>
+        <>
+            <GlobalStyle/>
+            <Router>
+                <Layout>
+                    <Nav>
+                        <TabButton to="/" activeClassName="active" exact>List</TabButton>
+                        <TabButton to="/focus" activeClassName="active" exact>Focus</TabButton>
+                    </Nav>
+                    <Switch>
+                        <Route path="/" exact component={List}>
+                            <List updateCompletion={updateTaskCompletion}
+                                  addTask={addTask}
+                                  focusedTask={focusedTask}
+                                  tasks={tasks}
+                                  setTasks={setTasks}
+                                  shuffleFocusedTask={shuffleFocusedTask}/>
+                        </Route>
+                        <Route path="/focus" exact>
+                            <Focus updateCompletion={updateTaskCompletion}
+                                   addTask={addTask}
+                                   focusedTask={focusedTask}
+                                   shuffleFocusedTask={shuffleFocusedTask}
+                                   tasks={tasks}
+                                   setTasks={setTasks}
+                            />
+                        </Route>
+                    </Switch>
+                </Layout>
+            </Router>
+        </>
     )
 }
 
